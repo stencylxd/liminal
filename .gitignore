@@ -1,4 +1,3 @@
-# ignoring dev side of things, executables and vscode preset, also aseprite
+.vscode/**
+sprite/**
 *.exe
-.vscode
-sprite
