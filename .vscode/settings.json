@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "stdio.h": "c",
-        "discord_game_sdk.h": "c",
-        "discord.h": "c",
-        "vector.h": "c",
-        "raylib.h": "c"
-    }
-}
