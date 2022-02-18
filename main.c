@@ -31,7 +31,7 @@ int main() {
         DrawText(TextFormat("is_jumping: %d", player_is_jumping), 10, 30, 20, WHITE);
         if (jump_timer_max < player_jump_timer) jump_timer_max = player_jump_timer;
         DrawText(TextFormat("jump_timer_max: %d", jump_timer_max), 10, 50, 20, WHITE);
-        DrawText(TextFormat("double_jump_status: %d", player_double_jump_status), 10, 70, 20, WHITE);
+        DrawText(TextFormat("jump_pressure: %d", player_jump_pressure), 10, 70, 20, WHITE);
         DrawPlayer();
         EndDrawing();
     }

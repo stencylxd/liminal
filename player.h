@@ -3,21 +3,15 @@
 Vector2 player_position = {500, 500};
 int player_is_jumping = 0, 
     player_prevent_movement = 1, 
-    player_can_double_jump = 1,
     player_size = 50, 
     player_height = 40, 
     player_jump_speed = 7, 
+    player_jump_pressure = 0,
     player_jump_height = 40,
     player_jump_timer = 0,
-    player_double_jump_status = 0,
-    player_jump_pressure = 0;
+    player_can_double_jump = 1,
+    player_double_jump_status = 0;
 Vector2 player_pos_offset = {0, 0};
-
-void UpdatePlayerMovement() {
-    if (player_prevent_movement) return;
-    UpdatePlayerJumping();
-
-}
 
 void UpdatePlayerJumping() {
     // check if player is jumping
@@ -28,18 +22,23 @@ void UpdatePlayerJumping() {
                 && !player_double_jump_status) {
             player_is_jumping = 1;
             player_double_jump_status = 1;
-            player_jump_timer = 0;
             player_jump_pressure = 0;
-        }
+            player_jump_timer = 0;
+        } 
+
         if (player_is_jumping == 1) {
             player_position.y -= (player_jump_speed - player_jump_pressure);
             player_jump_timer++;
+            if (player_jump_timer % 6 == 0) 
+                player_jump_pressure++;
             if (player_jump_timer > player_jump_height)
                 player_is_jumping = 2;
         }
         if (player_is_jumping == 2) {
             player_position.y += (player_jump_speed - player_jump_pressure);
             player_jump_timer--;
+            if (player_jump_timer % 5 == 0 && player_jump_pressure > 0) 
+                player_jump_pressure--;
             if (player_jump_timer == 0) {
                 player_is_jumping = 0;
                 player_double_jump_status = 0;
@@ -51,6 +50,11 @@ void UpdatePlayerJumping() {
         player_is_jumping = 1;
 }
 
+void UpdatePlayerMovement() {
+    if (player_prevent_movement) return;
+    UpdatePlayerJumping();
+
+}
 
 void DrawPlayer() { 
     DrawTriangleLines(
