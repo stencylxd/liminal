@@ -8,6 +8,7 @@ Vector2
 int player_prevent_movement = 1, 
     player_side_length      = 40,
     // jump variables
+
     // player_jumping statuses
     // 0 = not jumping
     // 1 = button pressed and being held
@@ -17,9 +18,11 @@ int player_prevent_movement = 1,
     player_jump_gravity     = 0,
     player_jump_gravity_max = 5,
     player_max_jump_height  = 40, 
+
     // strafing variables
     player_speed            = 9,
     player_acceleration     = 9,
+
     // player_direction keeps last direction after done strafing
     // 0  = no direction yet
     // -1 = left
@@ -28,20 +31,20 @@ int player_prevent_movement = 1,
     player_strafe_time      = 0;
 
 void UpdatePlayerStrafing() {
-    if (GetInputActive(CONTROL_LEFT) && GetInputActive(CONTROL_RIGHT))
+    if (InputDown(CONTROL_LEFT) && InputDown(CONTROL_RIGHT))
         return;
-    if (GetInputActive(CONTROL_MOVE)) {
+    if (InputDown(CONTROL_MOVE)) {
         // 5 here turns CONTROL_LEFT/RIGHT into -1 and 1, which are direction codes.
-        player_direction = -1;
+        player_direction = GetInput() - 5;
         if (player_strafe_time < 14)
             player_strafe_time++;
-        if (player_acceleration != 0 && player_strafe_time % 2 == 0)
+        if (player_acceleration != 0 && !(player_strafe_time % 2))
             player_acceleration--;
         player_position.x += player_direction * (player_speed - player_acceleration);
     }
-    if (player_acceleration < 7 && !GetInputActive(CONTROL_MOVE)) {
+    if (player_acceleration < 7 && !InputDown(CONTROL_MOVE)) {
         player_strafe_time--;
-        if (player_strafe_time % 2 == 0)
+        if (!(player_strafe_time % 2))
             player_acceleration++;
         player_position.x += player_direction * (player_speed - player_acceleration);
     }
@@ -50,9 +53,9 @@ void UpdatePlayerStrafing() {
 // REWRITE THIS!
 void UpdatePlayerJumping() {
     // check if player is jumping
-    if (GetInputActive(CONTROL_JUMP) && !player_jumping)
+    if (InputDown(CONTROL_JUMP) && !player_jumping)
         player_jumping = 1;
-    if (GetInputActive(CONTROL_JUMP) && player_jumping == 1) {
+    if (InputDown(CONTROL_JUMP) && player_jumping == 1) {
 
     }
     //if (player)
@@ -69,12 +72,13 @@ void DrawPlayer() {
     Vector2 
         v11 = {player_position.x + player_side_length, player_position.y - player_side_length}, 
         v12 = {player_position.x, player_position.y - player_side_length}, 
-        v13 = player_position, 
+        v13 = player_position,
         v21 = {player_position.x + player_side_length, player_position.y - player_side_length}, 
         v22 = {player_position.x + player_side_length, player_position.y}, 
-        v23 = player_position;
+        v23 = v13;
     DrawTriangleLines(v11, v12, v13, WHITE);
     DrawTriangleLines(v21, v22, v23, WHITE);
+    // temp line for "collision testing"
     DrawLine(0, 500, 1000, 500, WHITE);
     return;
 }
