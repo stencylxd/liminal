@@ -19,9 +19,9 @@ int main() {
     player_prevent_movement = 0;
     while (!WindowShouldClose()) {
         DiscordInvoke();
-        UpdatePlayerMovement();
         BeginDrawing();
-        ClearBackground(BLACK);
+        ClearBackground(BLANK);
+        UpdatePlayerMovement();
         DrawText(TextFormat("time: %d", player_strafe_time), 10, 10, 20, WHITE);
         DrawText(TextFormat("direction: %d", player_direction), 10, 30, 20, WHITE);
         DrawText(TextFormat("accel: %d", player_acceleration), 10, 70, 20, WHITE);
