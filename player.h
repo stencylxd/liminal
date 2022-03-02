@@ -31,8 +31,7 @@ int player_prevent_movement = 1,
     player_strafe_time      = 0;
 
 void UpdatePlayerStrafing() {
-    if (InputDown(CONTROL_LEFT) && InputDown(CONTROL_RIGHT))
-        return;
+    if (InputDown(CONTROL_LEFT) && InputDown(CONTROL_RIGHT)) return;
     if (InputDown(CONTROL_MOVE)) {
         // 5 here turns CONTROL_LEFT/RIGHT into -1 and 1, which are direction codes.
         player_direction = GetInput() - 5;
@@ -50,15 +49,15 @@ void UpdatePlayerStrafing() {
     }
 }
 
-// REWRITE THIS!
 void UpdatePlayerJumping() {
     // check if player is jumping
     if (InputDown(CONTROL_JUMP) && !player_jumping)
         player_jumping = 1;
-    if (InputDown(CONTROL_JUMP) && player_jumping == 1) {
-
+    if (InputDown(CONTROL_JUMP) && player_jumping) {
+        if (player_jump_gravity < player_jump_gravity_max)
+            player_jump_gravity++;
+        player_position.y -= (player_jump_speed - player_jump_gravity);
     }
-    //if (player)
     return;
 }
 
@@ -73,7 +72,7 @@ void DrawPlayer() {
         v11 = {player_position.x + player_side_length, player_position.y - player_side_length}, 
         v12 = {player_position.x, player_position.y - player_side_length}, 
         v13 = player_position,
-        v21 = {player_position.x + player_side_length, player_position.y - player_side_length}, 
+        v21 = v11, 
         v22 = {player_position.x + player_side_length, player_position.y}, 
         v23 = v13;
     DrawTriangleLines(v11, v12, v13, WHITE);
