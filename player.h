@@ -11,13 +11,15 @@ int player_prevent_movement = 1,
 
     // player_jumping statuses
     // 0 = not jumping
-    // 1 = button pressed and being held
-    // 2 = button let go
+    // 1 = going up
+    // -1 = going down
     player_jumping          = 0, 
-    player_jump_speed       = 8, 
+    player_jump_timer       = 0,
+    player_jump_speed       = 10, 
     player_jump_gravity     = 0,
+    // has to divide evenly into player_max_jump_height
     player_jump_gravity_max = 5,
-    player_max_jump_height  = 40, 
+    player_max_jump_height  = 50, 
 
     // strafing variables
     player_speed            = 9,
@@ -49,14 +51,22 @@ void UpdatePlayerStrafing() {
     }
 }
 
+// STILL REWRITING!!!!
 void UpdatePlayerJumping() {
     // check if player is jumping
-    if (InputDown(CONTROL_JUMP) && !player_jumping)
+    if (InputDown(CONTROL_JUMP) && player_jumping == 0)
         player_jumping = 1;
-    if (InputDown(CONTROL_JUMP) && player_jumping) {
-        if (player_jump_gravity < player_jump_gravity_max)
-            player_jump_gravity++;
-        player_position.y -= (player_jump_speed - player_jump_gravity);
+    if (player_jumping) {
+        if (player_jump_timer >= player_max_jump_height)
+            player_jumping = -1;
+        if (player_jump_timer == 0 && player_jumping == -1) {
+           player_jumping = 0;
+        //    player_jump_gravity = 0;
+            return;
+        }
+        if (!(player_jump_timer % player_jump_gravity_max) && player_jumping == 1)
+            player_jump_gravity += player_jumping;
+        player_position.y -= player_jumping * (player_jump_speed - player_jump_gravity);
     }
     return;
 }

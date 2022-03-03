@@ -22,9 +22,9 @@ int main() {
         BeginDrawing();
         ClearBackground(BLANK);
         UpdatePlayerMovement();
-        DrawText(TextFormat("time: %d", player_strafe_time), 10, 10, 20, WHITE);
-        DrawText(TextFormat("direction: %d", player_direction), 10, 30, 20, WHITE);
-        DrawText(TextFormat("accel: %d", player_acceleration), 10, 70, 20, WHITE);
+        DrawText(TextFormat("time: %d", player_jump_timer), 10, 10, 20, WHITE);
+        DrawText(TextFormat("gravity: %d", player_jump_gravity), 10, 30, 20, WHITE);
+        DrawText(TextFormat("jumping: %d", player_jumping), 10, 70, 20, WHITE);
         DrawPlayer();
         EndDrawing();
     }
