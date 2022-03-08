@@ -30,46 +30,38 @@ int player_prevent_movement = 1,
     // -1 = left
     // 1  = right
     player_direction        = 0,
-    player_strafe_time      = 0;
+    player_strafe_time      = 0,
+    player_max_strafe_time  = 14;
 
 void UpdatePlayerStrafing() {
     if (InputDown(CONTROL_LEFT) && InputDown(CONTROL_RIGHT)) return;
     if (InputDown(CONTROL_MOVE)) {
         // 5 here turns CONTROL_LEFT/RIGHT into -1 and 1, which are direction codes.
         player_direction = GetInput() - 5;
-        if (player_strafe_time < 14)
+        if (player_strafe_time < player_max_strafe_time)
             player_strafe_time++;
-        if (player_acceleration != 0 && !(player_strafe_time % 2))
+        if (player_acceleration && !(player_strafe_time % 2))
             player_acceleration--;
-        player_position.x += player_direction * (player_speed - player_acceleration);
     }
-    if (player_acceleration < 7 && !InputDown(CONTROL_MOVE)) {
+    if (player_acceleration < player_speed && !InputDown(CONTROL_MOVE)) {
         player_strafe_time--;
         if (!(player_strafe_time % 2))
             player_acceleration++;
-        player_position.x += player_direction * (player_speed - player_acceleration);
     }
+    player_position.x += player_direction * (player_speed - player_acceleration);
 }
 
-// STILL REWRITING!!!!
-void UpdatePlayerJumping() {
-    // check if player is jumping
-    if (InputDown(CONTROL_JUMP) && player_jumping == 0)
-        player_jumping = 1;
-    if (player_jumping) {
-        if (player_jump_timer >= player_max_jump_height)
-            player_jumping = -1;
-        if (player_jump_timer == 0 && player_jumping == -1) {
-           player_jumping = 0;
-        //    player_jump_gravity = 0;
-            return;
-        }
-        if (!(player_jump_timer % player_jump_gravity_max) && player_jumping == 1)
-            player_jump_gravity += player_jumping;
-        player_position.y -= player_jumping * (player_jump_speed - player_jump_gravity);
-    }
-    return;
-}
+//// STILL REWRITING!!!!
+//void UpdatePlayerJumping() {
+//    // check if player is jumping
+//    if (InputDown(CONTROL_JUMP) && player_jumping == 0)
+//        player_jumping = 1;
+//    if (player_jumping) {
+//        player_jump_timer++;
+//        player_position.y -= player_jumping * (player_jump_speed - player_jump_gravity);
+//    }
+//    return;
+//}
 
 void UpdatePlayerMovement() {
     if (player_prevent_movement) return;

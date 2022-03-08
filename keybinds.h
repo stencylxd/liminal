@@ -36,8 +36,7 @@ int InputDown(int control) {
             return (IsKeyDown(KEYBIND_CROUCH) || IsGamepadButtonDown(0, GAMEPAD_CROUCH));
         case CONTROL_PAUSE:
             return (IsKeyDown(KEYBIND_PAUSE)  || IsGamepadButtonDown(0, GAMEPAD_PAUSE));
-        default:
-            return 0;
+        default: return 0;
     }
 }
 

@@ -13,7 +13,7 @@ struct Application app;
 
 // initilizes discord activity. returns 1 if ok and 0 if not
 int SetupDiscord(uint64_t discord_id) {
-    // Make setup parameters
+    // make setup parameters
     struct DiscordCreateParams params;
     memset(&app, 0, sizeof(app));
     memset(&activity, 0, sizeof(activity));

@@ -7,7 +7,7 @@ int main() {
     // Setup discord
     if (SetupDiscord(861353865081258025)) 
         SetActivity("The player is playing");
-    // Setup basic stuff
+    // setup basic stuff
     InitAudioDevice();
     InitWindow(GetMonitorWidth(0), GetMonitorHeight(0), "liminal");
     SetConfigFlags(FLAG_MSAA_4X_HINT|FLAG_VSYNC_HINT);
