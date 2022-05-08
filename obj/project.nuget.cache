@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "O4c4vlwSK62Qb+i2dG4MPj6qOosD6fp5WrYHF/53jo8S0mxoLv4kQ+r25ckQJo5iLCIeLvZprPsDJLMQztyNjg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\mail\\Desktop\\projects\\code_for_other_people\\horse_racer (school)\\LiminalGame.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\mail\\.nuget\\packages\\raylib-cs\\4.0.0.1\\raylib-cs.4.0.0.1.nupkg.sha512",
+    "C:\\Users\\mail\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
