@@ -7,12 +7,15 @@ namespace LiminalGame {
     public static class Player {
         // player.h for the player controller
         public static Vector2 
-            player_position         = new Vector2(500, 500),
-            player_pos_offset       = Vector2.Zero;
+            PlayerPosition        = new Vector2(500, 500),
+            PlayerPosOffset       = Vector2.Zero;
+        private static Vector2
+            PlayerTriangleVec0    = new Vector2(),
+            PlayerTriangleVec1    = new Vector2(),
+            PlayerTriangleVec2    = new Vector2();
         public static bool
             PlayerPreventMovement = false,
-            PlayerJumping = false;
-
+            PlayerJumping         = false;
         public static int 
             PlayerSideLength      = 40,
             // jump variables
@@ -20,37 +23,35 @@ namespace LiminalGame {
             PlayerJumpSpeed       = 10, 
             PlayerJumpGravity     = 0,
             // has to divide evenly into PlayerJumpHeightMax
-            PlayerJumpGravityMax = 5,
-            PlayerJumpHeightMax  = 50, 
-
+            PlayerJumpGravityMax  = 5,
+            PlayerJumpHeightMax   = 50, 
             // strafing variables
-            PlayerSpeed            = 9,
-            PlayerAcceleration     = 9,
-
+            PlayerSpeed           = 9,
+            PlayerAcceleration    = 9,
             // player_direction keeps last direction after done strafing
             // 0  = no direction yet
             // -1 = left
             // 1  = right
-            player_direction        = 0,
-            player_strafe_time      = 0,
-            player_max_strafe_time  = 14;
+            PlayerDirection       = 0,
+            PlayerStrafeTime      = 0,
+            PlayerMaxStrafeTime   = 14;
 
         public static void UpdatePlayerStrafing() {
             if (InputDown(CONTROL_LEFT) && InputDown(CONTROL_RIGHT)) return;
             if (InputDown(CONTROL_MOVE)) {
                 // 5 here turns CONTROL_LEFT/RIGHT into -1 and 1, which are direction codes.
-                player_direction = GetInput() - 5;
-                if (player_strafe_time < player_max_strafe_time)
-                    player_strafe_time++;
-                if (PlayerAcceleration > 0 && player_strafe_time % 2 == 0)
+                PlayerDirection = GetInput() - 5;
+                if (PlayerStrafeTime < PlayerMaxStrafeTime)
+                    PlayerStrafeTime++;
+                if (PlayerAcceleration > 0 && PlayerStrafeTime % 2 == 0)
                     PlayerAcceleration--;
             }
             if (PlayerAcceleration < PlayerSpeed && !InputDown(CONTROL_MOVE)) {
-                player_strafe_time--;
-                if (player_strafe_time % 2 == 0)
+                PlayerStrafeTime--;
+                if (PlayerStrafeTime % 2 == 0)
                     PlayerAcceleration++;
             }
-            player_position.X += player_direction * (PlayerSpeed - PlayerAcceleration);
+            PlayerPosition.X += PlayerDirection * (PlayerSpeed - PlayerAcceleration);
         }
 
         public static void UpdatePlayerJumping() {
@@ -60,7 +61,7 @@ namespace LiminalGame {
             // do the jumping part of things
             if (PlayerJumping) {
                 PlayerJumpTimer++;
-                player_position.Y -= PlayerJumping ? 1 : 0 * (PlayerJumpSpeed - PlayerJumpGravity);
+                //PlayerPosition.Y -= PlayerJumping ? 1 : 0 * (PlayerJumpSpeed - PlayerJumpGravity);
             }
             return;
         }
@@ -72,19 +73,17 @@ namespace LiminalGame {
         }
 
         public static void DrawPlayer() { 
-            Vector2 
-                v11 = new Vector2(player_position.X + PlayerSideLength, player_position.Y - PlayerSideLength), 
-                v12 = new Vector2(player_position.X, player_position.Y - PlayerSideLength), 
-                v13 = player_position,
-                v21 = v11, 
-                v22 = new Vector2(player_position.X + PlayerSideLength, player_position.Y), 
-                v23 = v13;
-            DrawTriangleLines(v11, v12, v13, Color.WHITE);
-            DrawTriangleLines(v21, v22, v23, Color.WHITE);
+            PlayerTriangleVec0.X = PlayerPosition.X + PlayerSideLength;
+            PlayerTriangleVec0.Y = PlayerPosition.Y - PlayerSideLength;
+            PlayerTriangleVec1.X = PlayerPosition.X;
+            PlayerTriangleVec1.X = PlayerPosition.Y - PlayerSideLength;
+            PlayerTriangleVec2.X = PlayerPosition.X + PlayerSideLength;
+            PlayerTriangleVec2.Y = PlayerPosition.Y;
+            DrawTriangleLines(PlayerTriangleVec0, PlayerTriangleVec1, PlayerPosition, Color.WHITE);
+            DrawTriangleLines(PlayerTriangleVec0, PlayerTriangleVec2, PlayerPosition, Color.WHITE);
             // temp line for "collision testing"
             DrawLine(0, 500, 1000, 500, Color.WHITE);
             return;
-}
-
+        }
     }
 }

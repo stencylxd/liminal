@@ -4,12 +4,19 @@ namespace LiminalGame
 {
     public static class Transitions
     {
-        private const int T_StartButtonToPlayer = 0;
-        public static int CurrentTransitionId;
-        public static void SetTransitionActive(int Transition, bool Active)
+        public enum Transiton { 
+            None = -1,
+            StartButtonToPlayer = 0;
+        }
+        public static Transition CurrentTransition;
+        public static void SetTransitionActive(Transition TransitionType)
         {
-            if
-
+            CurrentTransition = Transition;
+            return;
+        }
+        
+        public static void T_StartButtonToPlayer() {
+            return;
         }
     }
 }

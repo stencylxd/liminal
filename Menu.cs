@@ -7,14 +7,15 @@ namespace LiminalGame
 {
     public static class Menu
     {
-         public static int 
-            BeginMenuItemsX = 100, 
-            BeginMenuItemsY = 100, 
-            MenuItemsBoxOffsetX = 10,
-            MenuItemsBoxOffsetY = 60,
+        public static int 
+            BeginMenuItemsX       = 100, 
+            BeginMenuItemsY       = 100, 
+            MenuItemsBoxOffsetX   = 10,
+            MenuItemsBoxOffsetY   = 60,
             MenuItemLineThickness = 1, 
-            MenuItemWidth = 200, 
-            MenuItemHeight = 50;
+            MenuItemWidth         = 200, 
+            MenuItemHeight        = 50;
+
         // DrawMenuBackgroundAnimation displays STARS in the background
         private static Rectangle[] StarRects = new Rectangle[40];
         private static int[,] StarDetails = new int[40, 2];
@@ -37,8 +38,7 @@ namespace LiminalGame
                 DrawRectanglePro(StarRects[x], Vector2.One, StarDetails[x, 0], ColorAlpha(Color.WHITE, opacity));
             }
         }
-          
-        // ShowMainMenu() shows the main menu. wow
+        
         private static Rectangle[] MenuItemsRects = new Rectangle[10];
         private static string[] MenuItemsText = new string[10];
         private static int MenuItemsCount = 0;
@@ -56,6 +56,7 @@ namespace LiminalGame
                 MenuItemsCount--;
             }
         }
+
         public static void RemoveAllMenuItems() {
             for (int i = 0; i < 40; i++) 
                 RemoveMenuItem(i);
@@ -70,11 +71,8 @@ namespace LiminalGame
         public static Color MenuItemColor = Color.WHITE;
         public static Color MenuItemHoverColor = Color.GOLD;
         public static void DrawMenu(float Opacity = 1, bool DrawInputHints = true) {
-            if (Opacity < 1) {
-                //MenuItemColor.a = MenuItemHoverColor.a = (byte)Opacity;
-                MenuItemColor = ColorAlpha(MenuItemColor, Opacity);
-                MenuItemHoverColor = ColorAlpha(MenuItemHoverColor, Opacity);
-            }
+            MenuItemColor = ColorAlpha(MenuItemColor, Opacity);
+            MenuItemHoverColor = ColorAlpha(MenuItemHoverColor, Opacity);
             for (int i = 0; i < MenuItemsCount; i++) {
                 if (RectHover(MenuItemsRects[i])) MenuItemLineThickness = 3; else MenuItemLineThickness = 1;
                 DrawRectangleLinesEx(
