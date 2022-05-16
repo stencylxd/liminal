@@ -1,19 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>Liminal</RootNamespace>
-
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>LiminalGame</RootNamespace>
     <StartupObject>LiminalGame.General</StartupObject>
     <Company>stencylxd</Company>
     <Product>Liminal</Product>
     <Authors>stencylxd</Authors>
-    <Description></Description>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Raylib-cs" Version="4.0.0.1" />
   </ItemGroup>
-
 </Project>

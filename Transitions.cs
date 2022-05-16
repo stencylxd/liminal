@@ -4,14 +4,16 @@ namespace LiminalGame
 {
     public static class Transitions
     {
-        public enum Transiton { 
+        public enum Transition { 
             None = -1,
             StartButtonToPlayer = 0;
         }
+
         public static Transition CurrentTransition;
+
         public static void SetTransitionActive(Transition TransitionType)
         {
-            CurrentTransition = Transition;
+            CurrentTransition = TransitionType;
             return;
         }
         

@@ -1,6 +1,6 @@
 ﻿using System;
-using static LiminalGame.Menu;
 using static LiminalGame.GUI;
+using static LiminalGame.Menu;
 using static LiminalGame.Player;
 using Raylib_cs;
 using static Raylib_cs.Raylib;

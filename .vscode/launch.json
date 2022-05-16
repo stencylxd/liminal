@@ -2,11 +2,11 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": ".NET Core Launch (console)",
+            "name": "Build and Run",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/bin/Debug/net5.0/Cube Blitz.dll",
+            "program": "${workspaceFolder}/bin/Debug/net6.0/LiminalGame.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             "console": "internalConsole",
