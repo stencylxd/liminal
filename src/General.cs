@@ -7,7 +7,6 @@ using static Raylib_cs.Raylib;
 
 namespace LiminalGame
 {
-    /* note: I DID NOT STEAL ANY OF THIS CODE. This was leftover from a project I was working on a while back. */
     public class General
     {
         public static int CurrentFrame = 0, ElapsedSeconds = 0;

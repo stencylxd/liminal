@@ -5,7 +5,6 @@ using static Raylib_cs.Raylib;
 
 namespace LiminalGame {
     public static class Player {
-        // player.h for the player controller
         public static Vector2 
             PlayerPosition        = new Vector2(500, 500),
             PlayerPosOffset       = Vector2.Zero;
