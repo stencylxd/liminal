@@ -6,7 +6,7 @@ namespace LiminalGame
     {
         public enum Transition { 
             None = -1,
-            StartButtonToPlayer = 0;
+            StartButtonToPlayer = 0
         }
 
         public static Transition CurrentTransition;
