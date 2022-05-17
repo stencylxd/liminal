@@ -1,6 +1,6 @@
 
 
-name: DotnetBuild
+name: DotnetTest
 
 on:
   push:
@@ -14,12 +14,13 @@ on:
   workflow_dispatch:
   
 jobs:
-  restore:
+  build:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
       - name: Restore
-        run: |
-          dotnet restore
-          dotnet build
-          dotnet clean
+        run: dotnet restore
+      - name: Build
+        run: dotnet build
+      - name: Cleanup
+        run: dotnet clean
