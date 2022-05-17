@@ -80,7 +80,7 @@ namespace LiminalGame
                     MenuItemLineThickness, 
                     DrawInputHints ? RectHover(MenuItemsRects[i]) ? MenuItemHoverColor : MenuItemColor : MenuItemColor);
                 DrawText(
-                    MenuItemsText[i], 
+                    MenuItemsText[i],
                     BeginMenuItemsX + MenuItemsBoxOffsetX, 
                     BeginMenuItemsY + (i * MenuItemsBoxOffsetY) + 10, 
                     25, 

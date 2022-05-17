@@ -54,6 +54,7 @@ namespace LiminalGame {
             PlayerPosition.X += PlayerDirection * (PlayerSpeed - PlayerAcceleration);
         }
 
+        // not done at all
         public static void UpdatePlayerJumping() {
             // check if player pressed the jump button
             if (InputDown(CONTROL_JUMP) && !PlayerJumping)

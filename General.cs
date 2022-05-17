@@ -13,7 +13,7 @@ namespace LiminalGame
         public static int CurrentFrame = 0, ElapsedSeconds = 0;
         public static State CurrentState = State.MainMenu;
         public static Random Rand = new Random();
-        public enum State : int {
+        public enum State {
             MainMenu = 0,
             Game = 1
         }
